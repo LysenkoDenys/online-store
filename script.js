@@ -42,6 +42,23 @@ async function setData() {
         )}</span><button>Add to cart</button></div></div></li>`
       );
     });
+    const cartsUl = document.querySelector(".cart-list");
+    const addItemHandler = data.filter((element) => {
+      cartsUl.insertAdjacentHTML(
+        "beforeend",
+        `<li><div class='li-wrapper'><img src=${
+          element.image
+        } alt='item'><h2 class='title'>${
+          element.title
+        }</h2><div class='price-cart'><span class='price'>${new Intl.NumberFormat(
+          "en-US",
+          {
+            style: "currency",
+            currency: "USD",
+          }
+        ).format(element.price)}</span></div></div></li>`
+      );
+    });
   } catch (error) {
     console.log(error.message); //
   }

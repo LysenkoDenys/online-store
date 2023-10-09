@@ -75,7 +75,8 @@ img {
   bottom: 5px;
 }
 
-.price {
+.price,
+span {
   font-weight: 600;
 }
 
@@ -93,4 +94,47 @@ button:hover {
 button:active {
   box-shadow: 3px 3px 3px rgb(61, 60, 60);
   background-color: rgb(27, 92, 54);
+}
+
+/* =================Cart===================== */
+h2 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.cart-empty-title {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cart-list-titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.cart-list-item-title,
+.cart-list-price-title,
+.cart-list-quantity-title {
+  width: 200px;
+  padding: 0px 0px 10px 0px;
+  border-bottom: 2px solid black;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+h3 {
+  text-align: right;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* ===MAIN WORK=== */
+.cart-list {
 }
