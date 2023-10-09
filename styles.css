@@ -1,0 +1,96 @@
+/* --------------- */
+/* -RESET STYLES- */
+/* --------------- */
+@import url("reset.css");
+
+body {
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  padding: 1%;
+}
+/* ------------------ */
+h1 {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+li {
+  margin-bottom: 30px;
+  margin-right: 20px;
+  max-width: 530px;
+  height: 570px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px rgb(167, 166, 166);
+  padding: 0px 10px 0px 10px;
+  position: relative;
+}
+li:hover {
+  box-shadow: 4px 4px 6px rgb(167, 166, 166);
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+img {
+  max-height: 200px;
+  max-width: 300px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
+  margin-bottom: 50px;
+  padding: 0px 10px 0px 10px;
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 50px;
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.price-cart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  position: absolute;
+  width: 100%;
+  bottom: 5px;
+}
+
+.price {
+  font-weight: 600;
+}
+
+button {
+  padding: 10px;
+  background-color: rgb(33, 131, 74);
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(61, 60, 60);
+  color: white;
+}
+
+button:hover {
+  background-color: rgb(27, 110, 62);
+}
+button:active {
+  box-shadow: 3px 3px 3px rgb(61, 60, 60);
+  background-color: rgb(27, 92, 54);
+}
