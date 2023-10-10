@@ -25,13 +25,13 @@ async function setData() {
     data.map((element) => {
       productsUl.insertAdjacentHTML(
         "beforeend",
-        `<li><div class='li-wrapper'><img src=${
+        `<li class='item-box'><div class='li-wrapper'><img src=${
           element.image
-        } alt='item'><h2 class='title'>${
+        } alt='item' class='img-box'><h2 class='title'>${
           element.title
         }</h2><p class='description'>${
           element.description
-        }</p><div class='price-cart'><span class='price'>${new Intl.NumberFormat(
+        }</p><div class='price-box'><span class='price'>${new Intl.NumberFormat(
           "en-US",
           {
             style: "currency",
@@ -39,24 +39,24 @@ async function setData() {
           }
         ).format(
           element.price
-        )}</span><button>Add to cart</button></div></div></li>`
+        )}</span><button class='button-box'>Add to cart</button></div></div></li>`
       );
     });
+    //cart======================================================
     const cartsUl = document.querySelector(".cart-list");
     const addItemHandler = data.filter((element) => {
       cartsUl.insertAdjacentHTML(
         "beforeend",
-        `<li><div class='li-wrapper'><img src=${
+        `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
           element.image
-        } alt='item'><h2 class='title'>${
+        } alt='item' class=img-cart><h2 class='title-cart'>${
           element.title
-        }</h2><div class='price-cart'><span class='price'>${new Intl.NumberFormat(
-          "en-US",
-          {
-            style: "currency",
-            currency: "USD",
-          }
-        ).format(element.price)}</span></div></div></li>`
+        }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(
+          element.price
+        )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
       );
     });
   } catch (error) {
