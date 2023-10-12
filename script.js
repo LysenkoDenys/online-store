@@ -22,7 +22,7 @@ async function setData() {
   try {
     const data = await getData(url);
     const productsUl = document.querySelector(".products-container");
-    data.map((element) => {
+    const itemBoxes = data.map((element) => {
       productsUl.insertAdjacentHTML(
         "beforeend",
         `<li class='item-box'><div class='li-wrapper'><img src=${
@@ -44,21 +44,32 @@ async function setData() {
     });
     //cart======================================================
     const cartsUl = document.querySelector(".cart-list");
-    const addItemHandler = data.filter((element) => {
-      cartsUl.insertAdjacentHTML(
-        "beforeend",
-        `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
-          element.image
-        } alt='item' class=img-cart><h2 class='title-cart'>${
-          element.title
-        }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(
-          element.price
-        )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
-      );
+    const cartsButton = document.querySelector(".button-cart");
+    const addItemHandler = data
+      .filter((element) => element.id === 9)
+      .map((element) => {
+        cartsUl.insertAdjacentHTML(
+          "beforeend",
+          `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
+            element.image
+          } alt='item' class=img-cart><h2 class='title-cart'>${
+            element.title
+          }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+          }).format(
+            element.price
+          )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
+        );
+        console.log(element.id); //
+      });
+    //cart======================================================
+    cartsButton.addEventListener("click", function () {
+      return (addItemHandler = []);
     });
+
+    console.log(addItemHandler);
+    console.log(data);
   } catch (error) {
     console.log(error.message); //
   }
