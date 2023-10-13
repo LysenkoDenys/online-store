@@ -18,11 +18,13 @@ async function getData(url) {
   return json;
 }
 
+const arrCart = [1];
+
 async function setData() {
   try {
     const data = await getData(url);
     const productsUl = document.querySelector(".products-container");
-    const itemBoxes = data.map((element) => {
+    data.map((element) => {
       productsUl.insertAdjacentHTML(
         "beforeend",
         `<li class='item-box'><div class='li-wrapper'><img src=${
@@ -43,33 +45,55 @@ async function setData() {
       );
     });
     //cart======================================================
+    const cartSection = document.querySelector(".cart-list-titles");
+    const cartTotal = document.querySelector(".total-amount");
+    cartSection.style.display = "none";
+    cartTotal.style.display = "none";
+
     const cartsUl = document.querySelector(".cart-list");
-    const cartsButton = document.querySelector(".button-cart");
-    const addItemHandler = data
-      .filter((element) => element.id === 9)
-      .map((element) => {
-        cartsUl.insertAdjacentHTML(
-          "beforeend",
-          `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
-            element.image
-          } alt='item' class=img-cart><h2 class='title-cart'>${
-            element.title
-          }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(
-            element.price
-          )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
-        );
-        console.log(element.id); //
+    if (arrCart.length > 0) {
+      cartSection.style.display = "flex";
+      cartTotal.style.display = "block";
+      data
+        .filter((element) => element.id === 9)
+        .map((element) => {
+          cartsUl.insertAdjacentHTML(
+            "beforeend",
+            `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
+              element.image
+            } alt='item' class=img-cart><h2 class='title-cart'>${
+              element.title
+            }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
+              style: "currency",
+              currency: "USD",
+            }).format(
+              element.price
+            )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
+          );
+          console.log(element.id); //
+        });
+      const cartsButton = document.querySelector(".button-cart");
+      console.log(cartsButton); //
+      cartsButton.addEventListener("click", function () {
+        cartsUl.innerHTML = "";
+        cartSection.style.display = "none";
+        cartTotal.style.display = "none";
       });
+    }
     //cart======================================================
-    cartsButton.addEventListener("click", function () {
-      return (addItemHandler = []);
+
+    //!buttons======================================================
+    console.log(arrCart);
+    const boxButton = document.querySelector(".button-box");
+    console.log(boxButton); //
+    boxButton.addEventListener("click", function () {
+      console.log(arrCart);
+      return arrCart.push(1);
     });
 
-    console.log(addItemHandler);
     console.log(data);
+
+    //buttons======================================================
   } catch (error) {
     console.log(error.message); //
   }
