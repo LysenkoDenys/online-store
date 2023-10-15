@@ -18,7 +18,59 @@ async function getData(url) {
   return json;
 }
 
-const arrCart = [1];
+const cartsUl = document.querySelector(".cart-list");
+const cartSection = document.querySelector(".cart-list-titles");
+const cartTotal = document.querySelector(".total-amount");
+const TotalSpanNode = document.querySelector("span");
+cartSection.style.display = "none";
+cartTotal.style.display = "none";
+const arrCart = [];
+
+function addToChartHandler(element) {
+  console.log(element); //
+  arrCart.length = 0;
+
+  let counter = 0;
+  counter++;
+  arrCart.push({
+    id: element.id,
+    image: element.image,
+    title: element.title,
+    price: element.price,
+    counter: counter,
+  });
+  // if (arrCart.find((elementArr) => elementArr.id === element.id)) {
+  //   return (element.counter = counter + 1);
+  // }
+  console.log(arrCart);
+  //!working
+  if (arrCart.length > 0) {
+    cartSection.style.display = "flex";
+    cartTotal.style.display = "block";
+    arrCart.map((element) => {
+      cartsUl.insertAdjacentHTML(
+        "beforeend",
+        `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
+          element.image
+        } alt='item' class=img-cart><h2 class='title-cart'>${
+          element.title
+        }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(
+          element.price
+        )}</p><div class='li-cart-qty-btn'><input type='number' id='qty' value="${counter}"><button class='button-cart'>Remove</button></div></div></li>`
+      );
+    });
+    const cartsButtonNode = document.querySelector(".button-cart");
+    cartsButtonNode.addEventListener("click", function () {
+      cartsUl.innerHTML = "";
+      cartSection.style.display = "none";
+      cartTotal.style.display = "none";
+    });
+  }
+  //!working
+}
 
 async function setData() {
   try {
@@ -39,61 +91,26 @@ async function setData() {
             style: "currency",
             currency: "USD",
           }
-        ).format(
-          element.price
-        )}</span><button class='button-box'>Add to cart</button></div></div></li>`
+        ).format(element.price)}</span><button class='button-box' id=${
+          element.id
+        } onclick="addToChartHandler(${JSON.stringify(element)
+          .split('"')
+          .join("&quot;")})">Add to cart</button></div></div></li>`
       );
     });
-    //cart======================================================
-    const cartSection = document.querySelector(".cart-list-titles");
-    const cartTotal = document.querySelector(".total-amount");
-    cartSection.style.display = "none";
-    cartTotal.style.display = "none";
-
-    const cartsUl = document.querySelector(".cart-list");
-    if (arrCart.length > 0) {
-      cartSection.style.display = "flex";
-      cartTotal.style.display = "block";
-      data
-        .filter((element) => element.id === 9)
-        .map((element) => {
-          cartsUl.insertAdjacentHTML(
-            "beforeend",
-            `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
-              element.image
-            } alt='item' class=img-cart><h2 class='title-cart'>${
-              element.title
-            }</h2></div><p class='price-cart'>${new Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-            }).format(
-              element.price
-            )}</p><div class='li-cart-qty-btn'><input type='number' id='qty'><button class='button-cart'>Remove</button></div></div></li>`
-          );
-          console.log(element.id); //
-        });
-      const cartsButton = document.querySelector(".button-cart");
-      console.log(cartsButton); //
-      cartsButton.addEventListener("click", function () {
-        cartsUl.innerHTML = "";
-        cartSection.style.display = "none";
-        cartTotal.style.display = "none";
+    //Total======================================================
+    function getTotalCosts(arrCart) {
+      const arrNew = arrCart.map((item) => {
+        return item.price * item.counter;
       });
+      console.log(arrNew); //
     }
-    //cart======================================================
-
-    //!buttons======================================================
-    console.log(arrCart);
-    const boxButton = document.querySelector(".button-box");
-    console.log(boxButton); //
-    boxButton.addEventListener("click", function () {
-      console.log(arrCart);
-      return arrCart.push(1);
-    });
+    console.log(arrCart); //
+    getTotalCosts(arrCart);
+    TotalSpanNode.innerText = "more";
+    //Total======================================================
 
     console.log(data);
-
-    //buttons======================================================
   } catch (error) {
     console.log(error.message); //
   }
