@@ -6,8 +6,8 @@
 // 2.2. add listener to the button on every item with function add to cart (every time it pushed item++)
 // 2.3. add items properties to the cart
 // 2.4. add items quantity counter to cart (with change quantity ability)
-// 2.5. add remove button to every item of cart
-// 2.6. add total to cart
+//* 2.5. add remove button to every item of cart
+//* 2.6. add total to cart
 // 2.7. if cart is empty by removing all of items --> 'cart is empty'
 
 const url = "https://fakestoreapi.com/products?limit=9";
@@ -24,33 +24,22 @@ const cartTotal = document.querySelector(".total-amount");
 const TotalSpanNode = document.querySelector("span");
 cartSection.style.display = "none";
 cartTotal.style.display = "none";
-const arrCart = [];
+let arrCart = [];
+let counter = 1;
 
-function addToChartHandler(element) {
-  console.log(element); //
-  arrCart.length = 0;
-
-  let counter = 0;
-  counter++;
-  arrCart.push({
-    id: element.id,
-    image: element.image,
-    title: element.title,
-    price: element.price,
-    counter: counter,
-  });
-  // if (arrCart.find((elementArr) => elementArr.id === element.id)) {
-  //   return (element.counter = counter + 1);
-  // }
-  console.log(arrCart);
-  //!working
+function updateCartDisplay() {
   if (arrCart.length > 0) {
     cartSection.style.display = "flex";
     cartTotal.style.display = "block";
+    if (cartsUl.hasChildNodes()) {
+      cartsUl.innerHTML = "";
+    }
     arrCart.map((element) => {
       cartsUl.insertAdjacentHTML(
         "beforeend",
-        `<li class='item-cart'><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
+        `<li class='item-cart' id=${
+          element.id
+        }><div class='li-cart-wrapper'><div class='li-cart-img-title'><img src=${
           element.image
         } alt='item' class=img-cart><h2 class='title-cart'>${
           element.title
@@ -59,17 +48,42 @@ function addToChartHandler(element) {
           currency: "USD",
         }).format(
           element.price
-        )}</p><div class='li-cart-qty-btn'><input type='number' id='qty' value="${counter}"><button class='button-cart'>Remove</button></div></div></li>`
+        )}</p><div class='li-cart-qty-btn'><input type='number' id='qty' value="${counter}"><button class='button-cart'  onclick="removeFromChartHandler(${
+          element.id
+        })">Remove</button></div></div></li>`
       );
     });
-    const cartsButtonNode = document.querySelector(".button-cart");
-    cartsButtonNode.addEventListener("click", function () {
-      cartsUl.innerHTML = "";
-      cartSection.style.display = "none";
-      cartTotal.style.display = "none";
-    });
   }
-  //!working
+}
+
+function addToChartHandler(element) {
+  //!working================================================================
+  if (arrCart.find((elementArr) => elementArr.id === element.id)) {
+    counter = ++counter;
+    return;
+  }
+  //!working================================================================
+  arrCart.push({
+    id: element.id,
+    image: element.image,
+    title: element.title,
+    price: element.price,
+    counter: element.counter,
+  });
+  updateCartDisplay();
+}
+
+function removeFromChartHandler(id) {
+  const arrFiltered = arrCart.filter((element) => element.id !== id);
+  arrCart = arrFiltered;
+  console.log(arrCart); //
+  updateCartDisplay();
+
+  if (arrCart.length == 0) {
+    cartsUl.innerHTML = "";
+    cartSection.style.display = "none";
+    cartTotal.style.display = "none";
+  }
 }
 
 async function setData() {
@@ -109,8 +123,6 @@ async function setData() {
     getTotalCosts(arrCart);
     TotalSpanNode.innerText = "more";
     //Total======================================================
-
-    console.log(data);
   } catch (error) {
     console.log(error.message); //
   }
