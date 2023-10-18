@@ -22,6 +22,7 @@ const cartEmptyTitleNode = document.querySelector(".cart-empty-title");
 const cartSection = document.querySelector(".cart-list-titles");
 const cartTotal = document.querySelector(".total-amount");
 const totalSpanNode = document.querySelector("span");
+
 cartSection.style.display = "none";
 cartTotal.style.display = "none";
 let arrCart = [];
