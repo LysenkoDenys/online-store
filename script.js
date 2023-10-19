@@ -9,14 +9,18 @@
 //* 2.5. add remove button to every item of cart
 //* 2.6. add total to cart
 
-const url = "https://fakestoreapi.com/products?limit=9";
+const selectNode = document.getElementById("items").value;
+let url = `https://fakestoreapi.com/products?limit=${selectNode}`;
 
 async function getData(url) {
+  showSpinner();
   const result = await fetch(url);
   const json = await result.json();
+  hideSpinner();
   return json;
 }
 
+const loadingSpinner = document.getElementById("loading-spinner");
 const cartsUlNode = document.querySelector(".cart-list");
 const cartEmptyTitleNode = document.querySelector(".cart-empty-title");
 const cartSection = document.querySelector(".cart-list-titles");
@@ -31,7 +35,9 @@ let counter = 1;
 async function setData() {
   try {
     const data = await getData(url);
+    console.log(data); //
     const productsUl = document.querySelector(".products-container");
+    productsUl.innerHTML = "";
     data.map((element) => {
       productsUl.insertAdjacentHTML(
         "beforeend",
@@ -146,4 +152,20 @@ function getTotalCosts(arrCart) {
     style: "currency",
     currency: "USD",
   }).format(numTotalSum)}`;
+}
+
+//spinner==========================================
+function showSpinner() {
+  loadingSpinner.style.display = "block";
+}
+
+function hideSpinner() {
+  loadingSpinner.style.display = "none";
+}
+
+function changeSelectHandler() {
+  const selectNode = document.getElementById("items").value;
+  url = `https://fakestoreapi.com/products?limit=${selectNode}`;
+  getData(url);
+  setData();
 }

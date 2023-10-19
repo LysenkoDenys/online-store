@@ -12,6 +12,35 @@ body {
   user-select: none; /* Standard */
 }
 /* ------------------ */
+
+label {
+  position: fixed;
+  top: 5px;
+  right: 10px;
+  color: white;
+  z-index: 1;
+}
+@media (max-width: 479px) {
+  label {
+    display: none;
+  }
+}
+
+select {
+  position: fixed;
+  border-radius: 3px;
+  top: 25px;
+  right: 10px;
+  padding: 3px 0px;
+  z-index: 1;
+}
+@media (max-width: 479px) {
+  select {
+    top: 5px;
+    padding: 1px 0px;
+  }
+}
+
 h1 {
   font-size: 50px;
   text-align: center;
@@ -22,7 +51,7 @@ h1 {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
 }
 @media (max-width: 479px) {
   h1 {
@@ -354,4 +383,32 @@ h3 {
 a {
   font-weight: 500;
   color: white;
+}
+
+/* spinner */
+#loading-spinner {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

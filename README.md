@@ -14,6 +14,6 @@
 
 <p>Sample:</p>
 
-![125](https://github.com/LysenkoDenys/online-store/assets/105970854/b78f1912-b70e-414a-9f0d-333eaa6b3098)
+![1586](https://github.com/LysenkoDenys/online-store/assets/105970854/c3acc682-9dd3-402f-be85-9c416d80086e)
 
 <p>Build with vanilla JS and totally adaptive to most popular devices</p>

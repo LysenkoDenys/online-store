@@ -11,7 +11,16 @@
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body>
-    <h1 class="main-title">Online store</h1>
+    <header>
+      <h1 class="main-title">Online store</h1>
+      <label for="items">items:</label>
+      <select onchange="changeSelectHandler()" name="items" id="items">
+        <option value="9" selected="selected">9</option>
+        <option value="12">12</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </header>
     <ul class="products-container"></ul>
     <div class="cart">
       <h2>Cart</h2>
@@ -25,6 +34,9 @@
         <ul class="cart-list"></ul>
         <h3 class="total-amount">Total: <span>0</span></h3>
       </div>
+    </div>
+    <div id="loading-spinner" class="hidden">
+      <div class="spinner"></div>
     </div>
     <footer class="footer">
       <a
