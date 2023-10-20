@@ -1,14 +1,3 @@
-// https://fakestoreapi.com/
-
-//* 1. fetch list of items to sale
-//* 2. logic to cart:
-//* 2.1. add item, price, quality
-//* 2.2. add listener to the button on every item with function add to cart
-//* 2.3. add items properties to the cart
-//* 2.4. add items quantity counter to cart (with change quantity ability)
-//* 2.5. add remove button to every item of cart
-//* 2.6. add total to cart
-
 const selectNode = document.getElementById("items").value;
 let url = `https://fakestoreapi.com/products?limit=${selectNode}`;
 
@@ -35,7 +24,6 @@ let counter = 1;
 async function setData() {
   try {
     const data = await getData(url);
-    console.log(data); //
     const productsUl = document.querySelector(".products-container");
     productsUl.innerHTML = "";
     data.map((element) => {
