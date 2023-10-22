@@ -1,3 +1,6 @@
+const CART_ITEMS_LABEL = "cart-items";
+const CART_ITEMS_TOTAL = "total";
+
 const selectNode = document.getElementById("items").value;
 let url = `https://fakestoreapi.com/products?limit=${selectNode}`;
 
@@ -13,6 +16,7 @@ const loadingSpinner = document.getElementById("loading-spinner");
 const cartsUlNode = document.querySelector(".cart-list");
 const cartEmptyTitleNode = document.querySelector(".cart-empty-title");
 const cartSection = document.querySelector(".cart-list-titles");
+const cartClearAllButtonNode = document.createElement("button");
 const cartTotal = document.querySelector(".total-amount");
 const totalSpanNode = document.querySelector("span");
 
@@ -51,6 +55,8 @@ async function setData() {
   } catch (error) {
     console.log(error.message); //
   }
+  //localStorage:
+  renderInitialCart();
 }
 setData();
 
@@ -140,6 +146,9 @@ function getTotalCosts(arrCart) {
     style: "currency",
     currency: "USD",
   }).format(numTotalSum)}`;
+
+  //localStorage:
+  localStorage.setItem(CART_ITEMS_LABEL, JSON.stringify(arrCart));
 }
 
 //spinner==========================================
@@ -157,3 +166,21 @@ function changeSelectHandler() {
   getData(url);
   setData();
 }
+
+// localStorage===========================================================:
+const renderInitialCart = () => {
+  const currentCartProducts = getCurrentCartItems();
+  console.log(currentCartProducts); //
+  if (!currentCartProducts.length) {
+    return;
+  }
+  //core:
+  arrCart = currentCartProducts;
+  getTotalCosts(arrCart);
+  updateCartDisplay();
+};
+
+//get cart items from localStorage:
+const getCurrentCartItems = () =>
+  JSON.parse(localStorage.getItem(CART_ITEMS_LABEL)) || [];
+// localStorage===========================================================:
