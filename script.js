@@ -141,6 +141,10 @@ function removeFromCartHandler(id) {
 function changeInputHandler(id) {
   const idForNode = `qty${id}`;
   const cartInputNode = document.getElementById(idForNode);
+  //to prevent input negative values:
+  if (cartInputNode.value <= 0) {
+    return (cartInputNode.value = 1);
+  }
   arrCart.find((elementArr) => elementArr.id === id).counter =
     cartInputNode.value;
   updateCartDisplay();
