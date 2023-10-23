@@ -225,7 +225,7 @@ h3 {
   text-align: right;
   font-weight: 600;
   font-size: 18px;
-  margin-bottom: 30px;
+  margin: 10px 0;
 }
 
 /* ======================cart list======================== */
@@ -388,12 +388,13 @@ h3 {
 }
 
 .total-amount {
-  padding-bottom: 40px;
+  padding: 10px 0;
   font-size: 20px;
 }
 
 .footer {
   text-align: center;
+  width: 100%;
   margin: 10px 0;
   padding: 10px 0;
   background: rgb(27, 110, 62);
