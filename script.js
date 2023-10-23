@@ -16,9 +16,13 @@ const loadingSpinner = document.getElementById("loading-spinner");
 const cartsUlNode = document.querySelector(".cart-list");
 const cartEmptyTitleNode = document.querySelector(".cart-empty-title");
 const cartSection = document.querySelector(".cart-list-titles");
-const cartClearAllButtonNode = document.createElement("button");
 const cartTotal = document.querySelector(".total-amount");
 const totalSpanNode = document.querySelector("span");
+
+const cartClearAllButtonNode = document.createElement("button");
+cartClearAllButtonNode.innerText = "Clear cart";
+cartClearAllButtonNode.setAttribute("class", "button-clear");
+cartClearAllButtonNode.addEventListener("click", removeAllFromCartHandler);
 
 cartSection.style.display = "none";
 cartTotal.style.display = "none";
@@ -65,6 +69,7 @@ function updateCartDisplay() {
     cartEmptyTitleNode.style.display = "none";
     cartSection.style.display = "flex";
     cartTotal.style.display = "block";
+    cartClearAllButtonNode.style.display = "block";
 
     if (cartsUlNode.hasChildNodes()) {
       cartsUlNode.innerHTML = "";
@@ -96,9 +101,13 @@ function updateCartDisplay() {
 }
 
 function addToCartHandler(element) {
+  arrCart.length === 0 &&
+    cartsUlNode.insertAdjacentElement("afterend", cartClearAllButtonNode);
+
   //if we pick the same item multiple times:
   if (arrCart.find((elementArr) => elementArr.id === element.id)) {
     arrCart.find((elementArr) => elementArr.id === element.id).counter++;
+
     updateCartDisplay();
     getTotalCosts(arrCart);
     return;
@@ -125,6 +134,7 @@ function removeFromCartHandler(id) {
     cartEmptyTitleNode.style.display = "block";
     cartSection.style.display = "none";
     cartTotal.style.display = "none";
+    cartClearAllButtonNode.style.display = "none";
   }
 }
 
@@ -170,12 +180,12 @@ function changeSelectHandler() {
 // localStorage===========================================================:
 const renderInitialCart = () => {
   const currentCartProducts = getCurrentCartItems();
-  console.log(currentCartProducts); //
   if (!currentCartProducts.length) {
     return;
   }
   //core:
   arrCart = currentCartProducts;
+  cartsUlNode.insertAdjacentElement("afterend", cartClearAllButtonNode);
   getTotalCosts(arrCart);
   updateCartDisplay();
 };
@@ -184,3 +194,16 @@ const renderInitialCart = () => {
 const getCurrentCartItems = () =>
   JSON.parse(localStorage.getItem(CART_ITEMS_LABEL)) || [];
 // localStorage===========================================================:
+
+function removeAllFromCartHandler() {
+  arrCart = [];
+  getTotalCosts(arrCart);
+
+  cartsUlNode.innerHTML = "";
+  cartEmptyTitleNode.style.display = "block";
+  cartSection.style.display = "none";
+  cartTotal.style.display = "none";
+  cartClearAllButtonNode.style.display = "none";
+
+  localStorage.clear();
+}

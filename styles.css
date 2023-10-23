@@ -339,35 +339,52 @@ h3 {
   }
 }
 
-.button-cart {
+.button-cart,
+.button-clear {
   padding: 10px;
-  background-color: rgb(241, 113, 27);
+  background-color: rgb(209, 189, 12);
   border-radius: 5px;
   box-shadow: 5px 5px 5px rgb(61, 60, 60);
   color: white;
 }
-.button-cart:hover {
-  background-color: rgb(182, 62, 15);
+.button-cart:hover,
+.button-clear:hover {
+  background-color: rgb(201, 157, 15);
 }
-.button-cart:active {
+.button-cart:active,
+.button-clear:active {
   box-shadow: 3px 3px 3px rgb(61, 60, 60);
-  background-color: rgb(165, 50, 12);
+  background-color: rgb(168, 132, 11);
 }
 @media (max-width: 992px) {
-  .button-cart {
+  .button-cart,
+  .button-clear {
     font-size: 14px;
   }
 }
 @media (max-width: 767px) {
-  .button-cart {
+  .button-cart,
+  .button-clear {
     font-size: 12px;
   }
 }
 @media (max-width: 479px) {
-  .button-cart {
+  .button-cart,
+  .button-clear {
     padding: 10px 5px;
     font-size: 10px;
   }
+}
+
+.button-clear {
+  margin: auto;
+  background-color: rgb(245, 67, 7);
+}
+.button-clear:hover {
+  background-color: rgb(201, 8, 8);
+}
+.button-clear:active {
+  background-color: rgb(148, 6, 6);
 }
 
 .total-amount {
