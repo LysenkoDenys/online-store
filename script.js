@@ -142,8 +142,11 @@ function changeInputHandler(id) {
   const idForNode = `qty${id}`;
   const cartInputNode = document.getElementById(idForNode);
   //to prevent input negative values:
-  if (cartInputNode.value <= 0) {
-    return (cartInputNode.value = 1);
+  if (cartInputNode.value <= 0 || !/^[0-9]*$/.test(cartInputNode.value)) {
+    console.log("yo!"); //
+    updateCartDisplay();
+    getTotalCosts(arrCart);
+    return;
   }
   arrCart.find((elementArr) => elementArr.id === id).counter =
     cartInputNode.value;
